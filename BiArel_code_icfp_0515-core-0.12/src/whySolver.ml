@@ -169,7 +169,7 @@ let prove_alt_ergo task showDebug =
   match result.CP.pr_answer with
   | CP.Valid   -> true
   | CP.Invalid -> false
-  | CP.Unknown s -> why_debug dp "UNKNOWN %s"  s ; false
+  | CP.Unknown (s,_) -> why_debug dp "UNKNOWN %s"  s ; false
   | _          -> false
 
 let prove_alt_ergo_st task showDebug =
@@ -180,7 +180,7 @@ let prove_alt_ergo_st task showDebug =
   match result.CP.pr_answer with
   | CP.Valid   -> true
   | CP.Invalid -> false
-  | CP.Unknown s -> why_debug dp "UNKNOWN %s"  s ; false
+  | CP.Unknown (s,_) -> why_debug dp "UNKNOWN %s"  s ; false
   | _          -> false
 
 
