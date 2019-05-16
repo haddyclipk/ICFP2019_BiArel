@@ -353,7 +353,7 @@ theory Birel
        sum 0.000 (cl (log2 n)) (((min_pow a) n) f)
 
   (* This lemma is necessary for bsplit/bfold types (due to real domain), not for costs *)
-   lemma cl_fl_sum_real: forall n: real. fl(n) = cl (n) ->  ((fl (n / 2.0)) + (cl (n / 2.0))) = n
+  (* lemma cl_fl_sum_real: forall n: real. fl(n) = cl (n) ->  ((fl (n / 2.0)) + (cl (n / 2.0))) = n *)
 
   axiom a1 : forall i n :real. 
    (2.000 * i) <= (n - 1.000)  -> i <= n
