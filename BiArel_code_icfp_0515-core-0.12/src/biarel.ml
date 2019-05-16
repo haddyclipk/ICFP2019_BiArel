@@ -48,7 +48,7 @@ let smt_error = SE.error_msg SMT
 
 let main_warning fi = SE.message 1 General fi
 let main_info    fi = SE.message 2 General fi
-let main_debug   fi = SE.message 1 General fi
+let main_debug   fi = SE.message 4 General fi
 
 
 let parseArgs () =
