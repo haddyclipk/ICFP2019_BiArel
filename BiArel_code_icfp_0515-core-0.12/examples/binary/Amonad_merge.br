@@ -1,0 +1,31 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+
+fix mg(z).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam.  lam k. lam a. lam ls. lam le. lam rs. lam re. lam b. 
+ if ( leq ls le) then
+    if ( leq rs re) then
+      letm x = { read a ls : {g->bt, f -> io} g : (B (U int ) ), [diff,0]  { g->bt ,f -> io }, 0} in
+      letm y = { read a rs : {g->bt,f -> io  } g : (B (U int ) ) , [diff,0]  { g->bt ,f -> io  }, 0 } in
+      if (leq x y) then 
+         letm bo = { update b k x : {g->bt ,f -> io } f : unitR , [diff,0]  { g->bt ,f -> io SetDiff [Kl] }, 0  } in
+         (celim (mg () [] [] [] [] [] [] [] [] [] ) ) (addone [] k) a (addone [] ls) le rs re b  
+      else
+         letm bp = { update b k y : {g->bt ,f -> io } f : unitR , [diff,0]  { g->bt ,f -> io SetDiff [Kl] }, 0  } in
+         (celim (mg () [] [] [] [] [] [] [] [] [] ) ) (addone [] k) a ls le (addone [] rs) re b  
+    else
+    	letm x_m  = { read a ls : {g->bt, f -> io} g : (B (U int )) , [diff,0]  { g->bt ,f -> io }, 0} in
+    	letm bo_m = { update b k x_m : {g->bt ,f -> io } f : unitR , [diff,0]  { g->bt ,f -> io SetDiff [Kl]  }, 0  } in
+    	(celim (mg () [] [] [] [] [] [] [] [] [] ) ) (addone [] k) a (addone [] ls) le rs re b
+ else
+   if (leq rs re) then
+       letm x_n  = { read a rs : {g->bt, f -> io} g : (B (U int )) , [diff,0]  { g->bt ,f -> io }, 0} in
+    	letm bo_n = { update b k x_n : {g->bt ,f -> io } f : unitR , [diff,0]  { g->bt ,f -> io SetDiff [Kl]  }, 0  } in
+    	(celim (mg () [] [] [] [] [] [] [] [] []  ) ) (addone [] k) a ls le (addone [] rs) re b
+   else 
+       return ()
+
+
+<= 0 : 
+unitR  => forall n  ; Kl ; LS ; LE ; RS ; RE ; g [diff, 0] :: loc ; f [diff, 0] :: loc ; bt [diff, 0] :: Arr. { Kl < RE && LS <= LE && LE < RS && RS <= RE && RE <= n && CBETAEQ bt Intersect [LS,RE], ie  }=> ( Bint[Kl]  => (array (g) [n] (U int) )  => Bint[LS]  => Bint[LE]  => Bint[RS]  => Bint[RE]  => (array (f) [n] (U int) ) [diff, 0 ] -> {g->bt , f-> io} f :  unitR , [diff,0 ]  { g->bt, f -> io SetDiff [Kl,RE] } )
+
+

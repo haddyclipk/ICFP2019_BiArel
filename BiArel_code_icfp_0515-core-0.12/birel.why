@@ -1,0 +1,367 @@
+	(** {Sum: a copy of Why3'S Sum instantiated for reals} *)
+
+theory Sum
+
+  use  real.Real
+  use HighOrd
+
+  function sum (a b: real) (f: real -> real) : real
+  (** sum of [f n] for [a <= n <= b] *)
+
+  axiom sum_def1:
+    forall f: real -> real, a b: real.
+    b < a -> sum a b f = 0.0
+
+  axiom sum_def2:
+    forall f: real -> real, a b: real.
+    a <= b -> sum a b f = sum a (b - 1.0) f + f b
+
+  axiom sum_left:
+    forall f: real -> real, a b: real.
+    a <= b -> sum a b f = f a + sum (a + 1.0) b f
+
+  axiom sum_ext:
+    forall f g: real -> real, a b: real.
+    (forall i. a <= i <= b -> f i = g i) ->
+    sum a b f = sum a b g
+
+  axiom sum_le:
+    forall f g: real -> real, a b: real.
+    (forall i. a <= i <= b -> f i <= g i) ->
+    sum a b f <= sum a b g
+
+  axiom sum_nonneg:
+    forall f: real -> real, a b: real.
+    (forall i. a <= i <= b -> 0.0 <= f i) ->
+    0.0 <= sum a b f
+
+  axiom sum_decomp:
+    forall f: real -> real, a b c: real. a <= b <= c ->
+    sum a c f = sum a b f + sum (b+1.0) c f
+
+end
+
+theory Arel
+
+use  int.Int
+  use import bool.Bool
+  
+
+
+end
+
+
+
+
+
+
+
+
+theory Test
+
+use import set.Set
+use import int.Int
+
+
+
+predicate mem int (set int)
+
+predicate (==) (s1 s2: set int) = forall x : int. mem x s1 <-> mem x s2
+
+  axiom extensionality:
+    forall s1 s2: set int. s1 == s2 -> s1 = s2
+
+constant emptyset : set int
+
+predicate is_empty (s: set int) = forall x: int. not (mem x s)
+
+  axiom empty_def1: is_empty (emptyset : set int)
+
+predicate subset (s1 s2: set int) = forall x : int. mem x s1 -> mem x s2
+
+  lemma subset_refl:
+    forall s: set int. subset s s
+
+  lemma subset_trans:
+    forall s1 s2 s3: set int. subset s1 s2 -> subset s2 s3 -> subset s1 s3
+
+
+constant full : (set int)
+axiom isfull : forall i : int. mem i full
+
+function range int int : (set int)
+
+axiom rangeset : forall x y i: int.  mem i (range x y )  <->   x<= i <=y
+
+function un (a: set int) (b: set int) : set int =
+   union a b
+
+axiom un_def1:
+    forall s1 s2: set int, x: int.
+    mem x (un s1 s2) <-> mem x s1 \/ mem x s2
+
+
+function it (a: set int) (b: set int) : set int =
+   inter a b
+
+axiom it_def1:
+    forall s1 s2: set int, x: int.
+    mem x (it s1 s2) <-> mem x s1 /\ mem x s2
+
+
+
+function df (a: set int) (b: set int) : set int =
+   diff a b
+
+axiom df_def1:
+    forall s1 s2: set int, x: int.
+    mem x (df s1 s2) <-> mem x s1 /\ not (mem x s2)
+
+  lemma subset_diff:
+    forall s1 s2: set int. subset (df s1 s2) s1
+
+ function add int (set int) : set int
+
+  axiom add_def1:
+    forall x y: int. forall s: set int.
+    mem x (add y s) <-> x = y \/ mem x s
+
+  function singleton (x: int) : set int = add x empty
+
+
+  function remove int (set int) : set int
+
+  axiom remove_def1:
+    forall x y : int, s : set int.
+    mem x (remove y s) <-> x <> y /\ mem x s
+
+  lemma subset_remove:
+    forall x: int, s: set int. subset (remove x s) s
+
+  function choose (s:set int) : int
+
+  axiom choose_def:
+    forall s: set int. not (is_empty s) -> mem (choose s) s
+
+
+
+ function cardinal (set int) : int
+
+  axiom cardinal_nonneg: forall s: set int. cardinal s >= 0
+
+  axiom cardinal_empty:
+    forall s: set int. cardinal s = 0 <-> is_empty s
+
+  axiom cardinal_add:
+    forall x : int. forall s : set int.
+    not (mem x s) -> cardinal (add x s) = 1 + cardinal s
+
+  axiom cardinal_remove:
+    forall x : int. forall s : set int.
+    mem x s -> cardinal s = 1 + cardinal (remove x s)
+
+  axiom cardinal_subset:
+    forall s1 s2 : set int. subset s1 s2 -> cardinal s1 <= cardinal s2
+
+  lemma cardinal1:
+    forall s: set int. cardinal s = 1 ->
+    forall x: int. mem x s -> x = choose s
+
+
+ function min_elt (set int) : int
+
+  axiom min_elt_def1:
+    forall s: set int. not (is_empty s) -> mem (min_elt s) s
+  axiom min_elt_def2:
+    forall s: set int. not (is_empty s) ->
+    forall x: int. mem x s -> min_elt s <= x
+  axiom min_elt_def3: 
+    forall x: int. 
+    x < (min_elt emptyset)  
+
+  function max_elt (set int) : int
+
+  axiom max_elt_def1:
+    forall s: set int. not (is_empty s) -> mem (max_elt s) s
+  axiom max_elt_def2:
+    forall s: set int. not (is_empty s) ->
+    forall x: int. mem x s -> x <= max_elt s
+
+
+
+
+ axiom it_def2:
+   forall s1 : set int, x y : int. 
+   mem x s1 ->  1 + cardinal (it s1 (range (x+1) y) )  =  cardinal (it s1 (range x y ) )
+
+axiom it_def3:
+   forall s1 : set int, x y : int. 
+  not mem x s1 ->   cardinal (it s1 (range (x+1) y) )  =  cardinal (it s1 (range x y))
+
+axiom it_def4:
+   forall s1 : set int, x y z: int. 
+  it s1 (range x y) == emptyset /\ x<= z <=y ->   not ( mem z s1) 
+
+axiom it_def5:
+   forall s1 : set int, x : int. 
+   exists s2: set int. subset s2 (un s1 (range x x)) 
+
+axiom it_def6:
+   forall s1: set int, i m : int.
+  exists s2: set int, i1 j:int. s2 == un s1 (range i i) /\ i1 = i+1 /\ j = m  ->
+   subset (un s1 (range i i)) s2 /\ subset (un s2 (range i1 j)) (un s1 (range i m))
+   
+
+axiom it_def8:
+   forall s1 : set int, i :int. mem i s1 -> 
+   exists s2: set int. subset s2 s1
+
+
+  
+axiom it9:
+   forall v: set int, i: int. mem i v ->
+   subset (un v (range i i)) (un v (range i i)) /\ subset (un v (range i i)) v
+
+axiom it10:
+  forall v: set int, i, m : int .  
+    subset (un (un v (range i i)) (range (i+1)  m)) (un v (range i m))
+
+axiom it11:
+   forall v: set int, i, m : int . 
+   subset (un v (range i i)) (un v (range i i)) /\ subset (un (un v (range i i)) (range (i + 1) m)) (un v (range i m))
+
+axiom it12:
+   forall k r: int .
+   subset (df full (range k k)) full /\ subset (df full (range (k + 1) r)) (df full (range k r))
+
+axiom it13:
+   forall s1 s2:set int. 
+   subset s1 s2 /\ subset s2 s1 <-> s1 == s2
+
+axiom it_14:
+   forall s1 : set int. 
+   exists s2: set int. subset s1 s2
+
+
+ predicate ge int int
+
+  function min int int : int
+  function max int int : int
+
+  axiom Max_is_ge   : forall x y:int. ge (max x y) x /\ ge (max x y) y
+  axiom Max_is_some : forall x y:int. max x y = x \/ max x y = y
+  axiom Min_is_le   : forall x y:int. ge x (min x y) /\ ge y (min x y)
+  axiom Min_is_some : forall x y:int. min x y = x \/ min x y = y
+
+  axiom Max_x : forall x y:int. ge x y -> max x y = x
+  axiom Max_y : forall x y:int. ge y x -> max x y = y
+  axiom Min_x : forall x y:int. ge y x -> min x y = x
+  axiom Min_y : forall x y:int. ge x y -> min x y = y
+
+  lemma Max_sym: forall x y:int. ge x y -> max x y = max y x
+  lemma Min_sym: forall x y:int. ge x y -> min x y = min y x
+
+
+
+
+
+axiom it_15:
+   forall x y:int. 
+   x < y  ->  max x y = max (x+1) y
+
+axiom it_16:
+   forall x y: int. 
+  un full (range x y) == full
+
+
+
+axiom it_18: 
+   forall x y  : int, v :set int. 
+     0<x < y -> not (mem x v)->
+     min_elt (it v (range (x + 1) y)) = min_elt (it v (range x  y))
+
+
+axiom it_20: 
+     forall x y  : int, v :set int. 
+     0<x < y -> not (mem x v)->
+     it v (range (x + 1) y) =  it v (range x y)
+
+axiom it_21: 
+     forall x y  : int, v :set int. 
+     0<x < y ->
+          (5 * (y - (x + 1))) <= (((5 * (y - x)) - 3) - 1)
+
+axiom it_22: 
+     forall x y  : int, v :set int. 
+     0<x < y -> not not (mem x v) ->
+ 1+ 13 * (y - (x + 1)) + 7 <= 13 * (y - x) - 5
+
+axiom it_23: 
+     forall x y  : int, v :set int. 
+     0<x < y -> 
+        5 * (y - x) - 5 >=0
+
+
+
+end
+
+theory Birel
+  use int.Int
+  use import Sum
+ 
+  use import real.Real
+
+ 
+  use import bool.Bool
+  use import real.ExpLog
+  use import real.MinMax
+  use import real.PowerReal
+  use import real.Truncate
+  use import real.FromInt
+  
+ 
+
+
+
+ function fl (x: real) : real =
+    from_int (floor x)
+
+   function cl (x: real) : real =
+   from_int (ceil x)
+
+   function fromInt (x: int) : real =
+   from_int x
+
+  constant min_pow :  real -> real -> (real -> real) -> real -> real = fun x -> fun y -> fun f -> fun i ->  (f (pow 2.0 i)) * (min x (pow 2.0  (cl(log2 y) - i)))
+
+   constant lin_f : real -> real =  fun f ->  5.0 * cl(f/2.0)
+
+   constant con_f : real -> real =  fun f ->  1.0
+
+   lemma fl_succ : forall n: real. (1.000 + (fl n)) = fl (1.000 + n)
+   lemma cl_succ : forall n: real. (1.000 + (cl n)) = cl (1.000 + n)
+
+
+  axiom nonzero : forall a n : real, f: real -> real.  0.0 <= n /\ 0.0 <= a ->  0.0  <= (sum 0.0 (cl (log2 n)) (min_pow a n f) )
+
+  axiom bsplit_func : forall a b n  : real, f: real -> real. 1.0 <= n /\ 0.0 <= b /\  b <= a /\ 1.0 <= a ->
+     (f n) +
+     ( (sum 0.000 (cl (log2 (cl (n / 2.000)))) (((min_pow b) (cl (n / 2.000)))  f)) +
+
+       (sum 0.000 (cl (log2 (fl (n / 2.000)))) (((min_pow (a-b)) (fl (n / 2.000))) f))) <=
+
+       sum 0.000 (cl (log2 n)) (((min_pow a) n) f)
+
+  (* This lemma is necessary for bsplit/bfold types (due to real domain), not for costs *)
+   lemma cl_fl_sum_real: forall n: real. fl(n) = cl (n) ->  ((fl (n / 2.0)) + (cl (n / 2.0))) = n
+
+  axiom a1 : forall i n :real. 
+   (2.000 * i) <= (n - 1.000)  -> i <= n
+
+  axiom a2 : forall i: real. 
+    ceil (i + 1.000 + 0.000) = Int.(+) (ceil i) 1
+
+  axiom Addceil:
+    forall x y:real. ceil (x + y) =  Int.(+) (ceil x) (ceil y)
+  
+end

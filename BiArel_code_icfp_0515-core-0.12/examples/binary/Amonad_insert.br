@@ -1,0 +1,22 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x+1] , 0 } in 
+let subone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x-1] , 0 } in 
+let sft = {fix shift(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam idx. lam i.  
+ if ( leq idx i) then
+      letm x = { read s i : {g->beta} g :  (B(U int )) , [diff,0]  { g->beta  }, 0} in
+      letm d = { update s (addone [] i) x :  {g->beta} g : unitR , [diff,0]  { g->beta   }, 0 } in 
+         (celim (shift () [] [] [] [] [] ) ) s idx (subone [] i)   
+else
+       return () : unitR => forall N [diff, 0] :: size ; IDX [diff,0] :: size ; I [diff , 0] :: size ; g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {0<IDX && IDX <= I && I < (N-1) && ((I+1) < INTMIN(BETAMIN(beta),N-1 )) }=> (  (array (g) [N] (U int)) => Bint[IDX] =>Bint[I] [diff, 0 ]-> {g-> beta} g : (U unit) , [diff,0 ]  { g-> beta   } ) , 0 } in
+
+fix insert(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam a. lam idx. lam i.  
+ 
+      letm b = { read s idx : {g->beta } g : (B (U int ) ) , [diff,0]  { g->beta  }, 0} in
+      if (leq b a) then
+         (celim (insert () [] [] [] [] [] ) ) s a (addone [] idx)  i
+          else 
+
+      letm d = { (celim (sft () [] [] [] [] [] ) ) s idx (subone [] i) : {g->beta } g : unitR , [diff,0]  { g->beta  },0 } in 
+        update s idx a 
+
+<= 0 : unitR =>  forall N [diff, 0] :: size ;  IDX [diff,0] :: size ; I [diff,0] :: size ;  g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {  0<=IDX && IDX <= I && I < (N-1) && (I < INTMIN(BETAMIN(beta),N-1 )) } => (  (array (g) [N] (U int) ) => intR => Bint[IDX] => Bint[I] [diff, 0 ]-> {g->beta } g : unitR , [diff,0]  { g->beta  } )

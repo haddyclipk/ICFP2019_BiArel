@@ -1,0 +1,12 @@
+let leq  = { contra : int  [min, 0]-> int [min,   0] -> bool , 0 } in
+let addone = {contra : forall x [min, 0] :: size. Uint [x] [min, 0] -> Uint [x+1] , 0 } in 
+let insert = {contra:  unit [min,0] -> forall N [min, 0] :: size ; A [min,0]:: size; IDX [min,0] :: size ; I [min,0] :: size ;  g [min, 0] :: loc . {  0<=IDX && IDX <= I && I < N } =>  (  (array (g) [N] int ) [min,0]-> int [min,0] -> Uint[IDX] [min,0]-> Uint[I] [min, 8*((I-IDX)) ]-> {g->io } g : unit , [min,1*((I-IDX))]  { g->io  } )  , 0  } in
+fix isort(z).  Lam. Lam. Lam.  lam s. lam i. lam ls.  
+	
+      letm a = { read s i : {g->io} g : int , [min,1]  { g->io  }, 0} in
+      letm b = { (celim (insert () [] [] [] [] [] )) s a 0  i   :  {g->io} g : unit , [min,I]  { g->io  }, (8*I)+5 } in 
+         (celim (isort () [] [] [] ) ) s (addone [] i) ls   
+
+
+<= [min, 0] : unit[min,0] -> forall N [min, 0] :: size ;  I [min,0] :: size ;  g [min, 0] :: loc . {  0<I && I < N } =>  (  (array (g) [N] int )[min,0] -> Uint[I] [min,0] -> Uint[N] [min, ((4*N*(N-1)) - (4*(I-1)*I))+ (10*(N-I)) ]-> {g->io } g : unit , [min, ((N-1)*(N/2)) - ((I)*(I/2) ) ]  { g->io  } )
+

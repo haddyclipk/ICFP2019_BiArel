@@ -1,0 +1,26 @@
+let leq  = { contra : int  [max, inf]-> int [max,   inf] -> bool , 0 } in
+let addone = {contra : forall x [max, inf] :: size. Uint [x] [max, inf] -> Uint [x+1] , 0 } in 
+fix mg(z).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam k. lam a. lam ls. lam le. lam rs. lam re. lam b. 
+ if ( leq ls le) then
+    if ( leq rs re) then
+      letm x = { read a ls : {g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, 0} in
+      letm y = { read a rs : {g->io,f -> io  } g : int , [max,1]  { g->io ,f -> io  }, 0 } in
+      if (leq x y) then 
+         letm bo = { update b k x : {g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b  
+      else
+         letm bp = { update b k y : {g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b  
+    else
+    	letm x_m  = { read a ls : {g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, 0} in
+    	letm bo_m = { update b k x_m : {g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, 0  } in
+    	(celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b
+ else
+   if (leq rs re) then
+       letm x_n  = { read a rs : {g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, 0} in
+    	letm bo_n = { update b k x_n : {g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, 0  } in
+    	(celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b
+   else 
+       return ()
+
+<= [max, 0] : unit -> forall n [max, 0] :: size ; K [max,0] :: size ; LS [max , 0] :: size ; LE [max , 0] :: size ; RS [max , 0] :: size ; RE [max , 0] :: size ; g [max, 0] :: loc ; f [max, 0] :: loc . {K < RE && LS <= LE && LE < RS && RS <= RE && RE <= n }=> ( Uint[K] -> (array (g) [n] int) -> Uint[LS] ->Uint[LE] -> Uint[RS] -> Uint[RE] -> (array (f) [n] int) [max, 16*(RE-K) ]-> {g->io , f-> io} g :  unit , [max,4*(RE-K)]  { g->io, f -> io  } )

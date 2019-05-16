@@ -1,0 +1,44 @@
+- Unary typing
+
+  * Arel's unary typing is divided into two modes: max mode only
+    tracks upper bounds whereas min mode only tracks lower bounds.
+
+  * Top-level expression
+    t <=[max,U] : A
+    t <= [min,L] : A
+
+- Rerlational typing
+  * Top-level expressions
+    e1, e2 <= t : τ 
+    e <= t : τ is shortcut for e,e <= t:τ
+
+  * contra is a syntactic marker that is trivially typechecked. It is
+    mainly used for a) primitives and b) debugging.
+  * FIXEXT, SWITCH, SPLIT are syntactic markers with type annotations. They are used as follows.
+    FIXEXT {A}, f(x).t
+    SPLIT { t } WITH {C}
+    SWITCH { t } WITH { τ ,C }
+
+  * Syntactic sugar:
+    '=>' stands for [diff,0] 
+    '->' stands for [max, 0]  
+
+- General notes on running the type checker:
+  * take a look at command line arguments by running
+    $ ./biarel --help
+
+   *As mentioned in the paper, example iSort, Insert may need to change the timeout for the heuristics.
+   
+    -- '-ht' : set the timeout for the heuristics 
+
+
+
+- Troubleshooting
+  Possible problems:
+  * 'Unbound module Why3': make sure you run make install lib in why3 directory
+  * 'Fatal error: exception Loc.Located(_, _)' :  'birel.why' theory file is wrong.
+     This error arises if you changes 'birel.why'. 
+     To debug: make sure it works by proving the lemmas:
+     $ why3 prove -P alt-ergo birel.why
+  * The version of Why3 used here is 0.87.3
+  

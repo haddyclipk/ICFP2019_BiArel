@@ -1,0 +1,48 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x+1] , 0 } in 
+
+FIXEXT { unit -> forall N [max, 0] :: size ; M [max,0] :: size ;   g [max, 0] :: loc ;  beta [max,0] :: Arr . {M < N } =>  (  (array (g) [N] bool) -> Uint[M] -> Uint[N] [max, 7*((N-M)+1) ]-> {g->ie } g :  bool , [max,1*((N-M)+1)]  { g->ie  } ) },
+
+ boolor(v).  Lam. Lam. Lam. Lam. lam s. lam m. lam ls.
+ SPLIT {
+     SWITCH { 
+        if ( leq m ls) then
+          letm a = { read s m : {g->beta} g : (B (U bool ) ), [diff,0] {g->beta} ; U ({g->ie} g : bool , [max,1]  { g->ie  }, {g-> ie} g : bool , [min,1]  { g-> ie } );0;0 } in
+          if a then 
+            return true
+          else
+           (celim (boolor () [] [] [] [] ) ) s (addone [] m) ls   
+        else
+          return false
+
+         } WITH { U ( {g->ie } g :  bool , [max,1*((N-M)+1)]  { g->ie  } , {g->ie } g :  bool , [min,1]  { g->ie  }) ;   7*((N-M)+1);   CBETAIN M , beta }
+
+    } WITH { CNOT CBETAIN M , beta }
+,
+
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x+1] , 0 } in 
+
+FIXEXT { unit [min,0]-> forall N [min, 0] :: size ; M [min,0] :: size ;   g [min, 0] :: loc ; beta [min,0] :: Arr. {M < N } =>  (  (array (g) [N] bool) [min,0]-> Uint[M] [min,0]-> Uint[N] [min, 7*((N-M)+1) ]-> {g->ie } g :  bool , [min,1]  { g->ie  } ) },
+
+ 
+     boolor(v).  Lam. Lam. Lam. Lam. lam s. lam m. lam ls.
+ SPLIT {
+     SWITCH { 
+        if ( leq m ls) then
+          letm a = { read s m : {g->beta} g : (B (U bool ) ), [diff,0] {g->beta} ; U ({g->ie} g : bool , [max,1]  { g->ie  }, {g-> ie} g : bool , [min,1]  { g-> ie } );0;0 } in
+          if a then 
+            return true
+          else
+           (celim (boolor () [] [] [] [] ) ) s (addone [] m) ls   
+        else
+          return false
+
+         } WITH { U ( {g->ie } g :  bool , [max,1*((N-M)+1)]  { g->ie  } , {g->ie } g :  bool , [min,1]  { g->ie  }) ;   7*((N-M)+1);   CBETAIN M , beta }
+
+
+    } WITH { CNOT CBETAIN M , beta }
+
+
+<= 0 :   
+unitR => forall M [diff, 0] :: size ; N [diff,0] :: size ;  g [diff, 0] :: loc  ;  beta [diff, 0] :: Arr . {0 < M &&M < N }=> (  (array (g) [N] (U bool))  => Bint[M] =>Bint[N]  [diff, 0 ]-> {g->beta} g : (U bool) , [diff,(N- INTMIN(N, BETAMIN(beta Intersect [M,N] )  ) ) ]  { g->beta } )

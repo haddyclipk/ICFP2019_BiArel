@@ -1,0 +1,19 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+
+fix map(f). Lam. Lam. Lam. Lam. lam a. lam k. lam n.
+ if ( leq k n) then
+   SPLIT {
+   letm x = { read a k :  {g->b} g :   (U int ) , [diff,0]  { g->b  } ;{g->b} g : (B (U int ) ), [diff,0]  { g->b  } ;  0 ; 0} in 
+   letm c = { update a k (f x) :   
+   			   {g->b } g : unitR , [diff,2]  { g->b Union [i]  } ; {g->b } g : unitR , [diff,0]  { g->b SetDiff [i]  } ; 0 ; 0 } 
+   	in
+     (celim (map (f) [] [] [] []) ) a (addone [] k)  n
+
+     } WITH { CBETAIN i , b }
+else
+return ()
+
+<= 0 : (B ((U int) [diff, 2] -> (U int) ) ) => forall i; m; g [diff, 0] :: loc ; b [diff, 0] :: Arr . {i < m} =>  ( (array (g) [m]  (U int)) => Bint[i] => Bint[m] => 
+{g-> b} g :  unitR , [diff,2* | b Intersect [i,m]| ]  { g->b   } )
+  

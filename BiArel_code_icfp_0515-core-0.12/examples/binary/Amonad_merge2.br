@@ -1,0 +1,66 @@
+
+  let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+
+  FIXEXT { unit -> forall n [max, 0] :: size ; Kl [max,0] :: size ; LS [max , 0] :: size ; LE [max , 0] :: size ; RS [max , 0] :: size ; RE [max , 0] :: size ; g [max, 0] :: loc ; f [max, 0] :: loc . {Kl < RE && LS <= LE && LE < RS && RS <= RE && RE <= n }=> ( Uint[Kl] -> (array (g) [n] int) -> Uint[LS] ->Uint[LE] -> Uint[RS] -> Uint[RE] -> (array (f) [n] int) [max, 16*(RE-Kl) ]-> {g->io , f-> io} g :  unit , [max,4*(RE-Kl)]  { g->io, f -> io  } )} ,
+  mg(z).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam k. lam a. lam ls. lam le. lam rs. lam re. lam b. 
+  
+ SWITCH {
+ if ( leq ls le) then
+    if ( leq rs re) then
+      letm x = { read a ls : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }), 0} in
+      letm y = { read a rs : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }) , 0 } in
+      if (leq x y) then 
+         letm bo = { update b k x : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ), 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b  
+      else
+         letm bp = { update b k y : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ) , 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b  
+    else
+      letm x_m  = { read a ls : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }), 0} in
+      letm bo_m = { update b k x_m : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ), 0  } in
+      (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b
+ else
+   if (leq rs re) then
+       letm x_n  = { read a rs : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }), 0} in
+      letm bo_n = { update b k x_n : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ), 0  } in
+      (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b
+   else 
+       return ()
+} WITH { U( {g->io , f-> io} g :  unit , [max,4*(RE-Kl)]  { g->io, f -> io  } , {g->io , f-> io} g :  unit , [min,2*(RE-Kl)]  { g->io, f -> io  }) ; 16*(RE-Kl); 0<1 }
+,
+
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+FIXEXT {  
+unit [min,0]-> forall n [min, 0] :: size ; Kl [min,0] :: size ; LS [min , 0] :: size ; LE [min , 0] :: size ; RS [min , 0] :: size ; RE [min , 0] :: size ; g [min, 0] :: loc ; f [min, 0] :: loc . {Kl < RE && LS <= LE && LE < RS && RS <= RE && RE <= n }=> ( Uint[Kl] [min,0]-> (array (g) [n] int) [min,0] -> Uint[LS] [min,0]->Uint[LE] [min,0]-> Uint[RS] [min,0]-> Uint[RE] [min,0] -> (array (f) [n] int) [min, 14*(RE-Kl) ]-> {g->io , f-> io} g :  unit , [min,2*(RE-Kl)]  { g->io, f -> io  } )
+} ,
+ mg(z).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam k. lam a. lam ls. lam le. lam rs. lam re. lam b. 
+ SWITCH{
+ if ( leq ls le) then
+    if ( leq rs re) then
+      letm x = { read a ls : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }), 0} in
+      letm y = { read a rs : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }) , 0 } in
+      if (leq x y) then 
+         letm bo = { update b k x : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ), 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b  
+      else
+         letm bp = { update b k y : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ) , 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b  
+    else
+      letm x_m  = { read a ls : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }), 0} in
+      letm bo_m = { update b k x_m : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ), 0  } in
+      (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b
+ else
+   if (leq rs re) then
+       letm x_n  = { read a rs : U ({g->io, f -> io} g : int , [max,1]  { g->io ,f -> io }, {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }), 0} in
+      letm bo_n = { update b k x_n : U ({g->io ,f -> io } g : unit , [max,1]  { g->io ,f -> io  }, {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  } ), 0  } in
+      (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b
+   else 
+       return ()
+} WITH { U( {g->io , f-> io} g :  unit , [max,4*(RE-Kl)]  { g->io, f -> io  } , {g->io , f-> io} g :  unit , [min,2*(RE-Kl)]  { g->io, f -> io  }) ; 14*(RE-Kl) ; 0<1 }
+
+<= 0 : 
+unitR  => forall n  ; Kl ; LS ; LE ; RS ; RE ; g [diff, 0] :: loc ; f [diff, 0] :: loc . { Kl < RE && LS <= LE && LE < RS && RS <= RE && RE <= n  }=> ( Bint[Kl]  => (array (g) [n] (U int) )  => Bint[LS]  => Bint[LE]  => Bint[RS]  => Bint[RE]  => (array (f) [n] (U int) ) [diff, 2*(RE-Kl) ] -> {g->io , f-> io} f :  (U unit) , [diff,2*(RE-Kl) ]  { g->io, f -> io  } )
+
+

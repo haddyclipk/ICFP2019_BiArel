@@ -1,0 +1,24 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+let subone = {contra : forall x [diff, 0] :: size. Bint [x] [diff, 0] -> Bint [x-1] , 0 } in 
+let divTwo =  {contra: forall x[diff,0] :: size. Bint[x] => Bint[x/2],0} in
+let badd = {contra : forall xx [diff, 0] :: size; yy [diff, 0] :: size. Bint [xx] => Bint[yy] =>  Bint [xx+yy] , 0 } in 
+let exp2piadd = {contra : U int => U int =>  U int , 0 } in 
+let sub = {contra : U int => U int =>  U int , 0 } in 
+
+
+fix loop(z). Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam k. lam n. lam x. lam pr.
+    if ( leq k (divTwo [] n)  ) then
+   letm e = { read x (badd [] [] pr k) : {g-> beta1} g : (U int), [diff,0]  { g-> beta1  }, 0} in 
+   letm o = { read x (badd [] [] pr (badd [] [] k (divTwo [] n)) ) : {g-> beta1} g : (U int), [diff,0]  { g-> beta1}, 0} in 
+   letm c = { update x (badd [] [] pr k) (exp2piadd  e o) : {g-> beta1 } g : unitR , [diff,0]  { g-> io }, 0 } in
+   letm d = { update x (badd [] [] pr (badd [] [] k (divTwo [] n)) ) (sub e o)  : {g->  io } g : unitR , [diff,0]  { g->  io  }, 0 } in
+     (celim (loop () [] [] [] [] [] [] []  ) )  (addone [] k) n x pr
+else
+return ()
+
+
+
+<= 0 : unitR => forall K [diff,0] :: size; M [diff,0] :: size; N [diff,0] :: size; PR [diff,0] :: size; g [diff, 0] :: loc ;f [diff, 0] :: loc   ; beta1 [diff, 0] :: Arr . {(2*K) < (M-1) && (PR+M) < N } => ( Bint[K] => Bint[M] =>   (array (g) [N]  (U int)) => Bint[PR]  =>  
+{g-> beta1, f -> io} g :  unitR , [diff,0 ]  { g->io, f-> io } )
+  

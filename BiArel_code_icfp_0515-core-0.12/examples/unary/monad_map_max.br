@@ -1,0 +1,13 @@
+let leq  = { contra : int  [max, 0]-> int [max, 0] -> bool , 0 } in
+let addone = {contra : forall x [max, 0] :: size. Uint [x] [max, 0] -> Uint [x+1] , 0 } in 
+fix map(f). Lam. Lam. Lam.  lam a. lam k. lam n.
+ if ( leq k n) then
+   letm x = { read a k : {g->io} g : int , [max,1]  { g->io  }, 0}
+in
+   letm b = { update a k (f x) : {g->io } g : unit , [max,4]  { g->io  }, 0 } in
+     (celim (map (f) [] [] []) ) a (addone [] k)  n
+else
+return ()
+
+<= [max, 0]  : (int [max, 2] -> int) [max,0] -> forall i [max, 0] :: size ; n [max , 0] :: size ; g [max, 0] :: loc . {i < n}=> ( (array (g) [n] int) 
+ [max,0] ->  Uint[i] [max, 0 ]->   Uint[n] [max, 8*(n-i) ]->  {g-> io} g :  unit , [max,5*(n-i)]  { g->io  }  )

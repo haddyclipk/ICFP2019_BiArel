@@ -1,0 +1,134 @@
+
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x+1] , 0 } in 
+let subone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x-1] , 0 } in 
+
+
+FIXEXT { unit -> forall N [max, 0] :: size ;  I [max,0] :: size ;  g [max, 0] :: loc ;beta [max, 0] :: Arr . {  1<=I && I < N } =>  (  (array (g) [N] int ) -> Uint[I] -> Uint[N] [max, ((4*N*(N-1)) - (4*(I-1)*I))+ (10*(N-I))   ]-> {g->io } g : unit , [max,((3/2)*(N-1)* N ) -((3/2)*I*(I))   ]  { g->io  } ) },
+
+ isort(z).  Lam. Lam. Lam. Lam.  lam s. lam i. lam ls.   
+  SPLIT {
+     SWITCH { 
+     let sft = {
+      fix shift(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam idx. lam i.  
+ if ( leq idx i) then
+      letm x = { read s i : {g->beta} g :  (B(U int )) , [diff,0]  { g->beta  }; 
+       U( {g->io} g : int , [max,1]  { g->io  } , {g->io} g : int , [min,1]  { g->io  } )
+        ; 0; 0} in
+      letm d = { update s (addone [] i) x :  {g->beta} g : unitR , [diff,0]  { g->beta   }; 
+       U ( {g->io} g : unit , [max,2]  { g->io  } ,  {g->io} g : unit , [min,2]  { g->io  })
+       ; 0 ;0 } in 
+         (celim (shift () [] [] [] [] [] ) ) s idx (subone [] i)   
+else
+       return ()
+
+     : unitR => forall N [diff, 0] :: size ; IDX [diff,0] :: size ; I [diff , 0] :: size ; g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {0<IDX && IDX <= I && I < (N-1) && ((I+1) < INTMIN(BETAMIN(beta),N-1 )) }=> (  (array (g) [N] (U int)) => Bint[IDX] =>Bint[I] [diff, 0 ]-> {g-> beta} g : (U unit) , [diff,0 ]  { g-> beta   } )  ; 
+
+      U ( unit -> forall N [max, 0] :: size ; IDX [max,0] :: size ; I [max,0] :: size ;  g [max, 0] :: loc;beta [max, 0] :: Arr  . {  0<IDX && IDX <= I && I < N } =>  (  (array (g) [N] int ) -> Uint[IDX] -> Uint[I] [max, 7*((I-IDX)+1) ]-> {g->io } g : unit , [max,3*((I-IDX)+1)]  { g->io  } ) , 
+
+       unit [min,0]-> forall N [min, 0] :: size ; IDX [min,0] :: size ; I [min,0] :: size ;  g [min, 0] :: loc ; beta [min, 0] :: Arr . {  0<IDX && IDX <= I && I < N } =>  (  (array (g) [N] int ) [min,0]-> Uint[IDX] [min,0] -> Uint[I] [min, 7*((I-IDX)+1) ]-> {g->io } g : unit , [min,3*((I-IDX)+1)]  { g->io  } )
+       ) 
+      ; 0 ;0
+      } in
+
+      let insert = {fix inst(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam a. lam idx. lam i.  
+ 
+      letm b = { read s idx : {g->beta } g : (B (U int ) ) , [diff,0]  { g->beta  }; U ({g->io} g : int , [max,1]  { g->io  }, {g->io} g : int , [min,1]  { g->io  }) ; 0 ; 0} in
+      if (leq b a) then
+         (celim (inst () [] [] [] [] [] ) ) s a (addone [] idx)  i
+          else 
+
+      letm d = { (celim (sft () [] [] [] [] [] ) ) s idx (subone [] i) : {g->beta } g : unitR , [diff,0]  { g->beta  }; 
+      U ({g->io } g : unit , [max,3*((I-IDX))]  { g->io  }  , {g->io } g : unit , [min,3*((I-IDX))]  { g->io  }  ) ; 0 ; (7*((I-IDX)))+ 5 } in 
+        update s idx a  
+
+      : unitR =>  forall N [diff, 0] :: size ;  IDX [diff,0] :: size ; I [diff,0] :: size ;  g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {  0<=IDX && IDX <= I && I < (N-1) && (I < INTMIN(BETAMIN(beta),N-1 )) } => (  (array (g) [N] (U int) ) => intR => Bint[IDX] => Bint[I] [diff, 0 ]-> {g->beta } g : unitR , [diff,0]  { g->beta  } )  ; 
+
+      U ( unit -> forall N [max, 0] :: size ;  IDX [max,0] :: size ; I [max,0] :: size ;  g [max, 0] :: loc ; beta [max, 0] :: Arr . {  0<IDX && IDX <= I && I < (N-1) } =>  (  (array (g) [N] int ) -> int -> Uint[IDX] -> Uint[I] [max, 8*((I-IDX)+1) ]-> {g->io } g : unit , [max,3*((I-IDX)+1)]  { g->io  } )  , 
+
+      unit [min,0] -> forall N [min, 0] :: size ; IDX [min,0] :: size ; I [min,0] :: size ;  g [min, 0] :: loc ;beta [min, 0] :: Arr  . {  0<IDX && IDX <= I && I < (N-1) } =>  (  (array (g) [N] int ) [min,0]-> int [min,0] -> Uint[IDX] [min,0]-> Uint[I] [min, 8*((I-IDX)+1) ]-> {g->io } g : unit , [min,1*((I-IDX)+1)]  { g->io  } ) ) ;
+
+       0; 0 } in 
+
+      letm a = { read s i :  {g->beta} g : (B (U int ) ), [diff,0] {g-> beta} ; U ({g-> io} g : int , [max,1]  { g-> io }, {g-> io} g : int , [min,1]  { g-> io } ); 0; 0 } in
+
+      letm bb = { (celim (insert () [] [] [] [] [] )) s a 0  i : {g-> beta} g : (unitR ), [diff,0] {g-> beta  }  ; U ({g->io} g : unit , [max,(3*I)]  { g->io  },  {g->io} g : unit , [min,I]  { g->io  }) ; 0 ; ((8*I)+5) } in
+
+     
+          (celim (isort () [] [] [] [] ) ) s (addone [] i) ls   
+         
+         } WITH { U ({g->io } g : unit , [max,((3/2)*(N-1)* N ) -((3/2)*I*(I))   ]  { g->io  }, 
+         {g->io } g : unit , [min, ((N-1)*(N/2)) - ((I)*(I/2) ) ]  { g->io  }) ;   ((4*N*(N-1)) - (4*(I-1)*I))+ (10*(N-I));   INTMIN(BETAMIN(beta),N-1 ) <= I }
+
+    } WITH { I < INTMIN(BETAMIN(beta),N-1 ) }
+,
+
+
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x+1] , 0 } in 
+let subone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x-1] , 0 } in 
+
+
+FIXEXT {  unit[min,0] -> forall N [min, 0] :: size ;  I [min,0] :: size ;  g [min, 0] :: loc ;beta [min, 0] :: Arr . {  1<=I && I < N } =>  (  (array (g) [N] int )[min,0] -> Uint[I] [min,0] -> Uint[N] [min, ((4*N*(N-1)) - (4*(I-1)*I))+ (10*(N-I)) ]-> {g->io } g : unit , [min, ((N-1)*(N/2)) - ((I)*(I/2) ) ]  { g->io  } ) },
+
+isort(z).  Lam. Lam. Lam. Lam.  lam s. lam i. lam ls.   
+   SPLIT {
+     SWITCH { 
+      let sft = {  
+      fix shift(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam idx. lam i.  
+        if ( leq idx i) then
+      letm x = { read s i : {g->beta} g :  (B(U int )) , [diff,0]  { g->beta  }; 
+       U( {g->io} g : int , [max,1]  { g->io  } , {g->io} g : int , [min,1]  { g->io  } )
+        ; 0; 0} in
+      letm d = { update s (addone [] i) x :  {g->beta} g : unitR , [diff,0]  { g->beta   }; 
+       U ( {g->io} g : unit , [max,2]  { g->io  } ,  {g->io} g : unit , [min,2]  { g->io  })
+       ; 0 ;0 } in 
+         (celim (shift () [] [] [] [] [] ) ) s idx (subone [] i)   
+      else
+       return ()
+
+
+      : unitR => forall N [diff, 0] :: size ; IDX [diff,0] :: size ; I [diff , 0] :: size ; g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {0<IDX && IDX <= I && I < (N-1) && ((I+1) < INTMIN(BETAMIN(beta),N-1 )) }=> (  (array (g) [N] (U int)) => Bint[IDX] =>Bint[I] [diff, 0 ]-> {g-> beta} g : (U unit) , [diff,0 ]  { g-> beta   } )  ; 
+
+      U ( unit -> forall N [max, 0] :: size ; IDX [max,0] :: size ; I [max,0] :: size ;  g [max, 0] :: loc; beta [max, 0] :: Arr  . {  0<IDX && IDX <= I && I < N } =>  (  (array (g) [N] int ) -> Uint[IDX] -> Uint[I] [max, 7*((I-IDX)+1) ]-> {g->io } g : unit , [max,3*((I-IDX)+1)]  { g->io  } ) , 
+
+       unit [min,0]-> forall N [min, 0] :: size ; IDX [min,0] :: size ; I [min,0] :: size ;  g [min, 0] :: loc ; beta [min, 0] :: Arr  . {  0<IDX && IDX <= I && I < N } =>  (  (array (g) [N] int ) [min,0]-> Uint[IDX] [min,0] -> Uint[I] [min, 7*((I-IDX)+1) ]-> {g->io } g : unit , [min,3*((I-IDX)+1)]  { g->io  } )
+       ) 
+      ; 0 ;0
+      } in
+
+      let insert = {fix inst(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam a. lam idx. lam i.  
+ 
+      letm b = { read s idx : {g->beta } g : (B (U int ) ) , [diff,0]  { g->beta  }; U ({g->io} g : int , [max,1]  { g->io  }, {g->io} g : int , [min,1]  { g->io  }) ; 0 ; 0} in
+      if (leq b a) then
+         (celim (inst () [] [] [] [] [] ) ) s a (addone [] idx)  i
+          else 
+
+      letm d = { (celim (sft () [] [] [] [] [] ) ) s idx (subone [] i) : {g->beta } g : unitR , [diff,0]  { g->beta  }; 
+      U ({g->io } g : unit , [max,3*((I-IDX))]  { g->io  }  , {g->io } g : unit , [min,3*((I-IDX))]  { g->io  }  ) ; 0 ; (7*((I-IDX)))+ 5 } in 
+        update s idx a  
+
+      : unitR =>  forall N [diff, 0] :: size ;  IDX [diff,0] :: size ; I [diff,0] :: size ;  g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {  0<=IDX && IDX <= I && I < (N-1) && (I < INTMIN(BETAMIN(beta),N-1 )) } => (  (array (g) [N] (U int) ) => intR => Bint[IDX] => Bint[I] [diff, 0 ]-> {g->beta } g : unitR , [diff,0]  { g->beta  } )  ; 
+
+      U ( unit -> forall N [max, 0] :: size ;  IDX [max,0] :: size ; I [max,0] :: size ;  g [max, 0] :: loc ; beta [max, 0] :: Arr . {  0<IDX && IDX <= I && I < (N-1) } =>  (  (array (g) [N] int ) -> int -> Uint[IDX] -> Uint[I] [max, 8*((I-IDX)+1) ]-> {g->io } g : unit , [max,3*((I-IDX)+1)]  { g->io  } )  , 
+
+        unit [min,0] -> forall N [min, 0] :: size ; IDX [min,0] :: size ; I [min,0] :: size ;  g [min, 0] :: loc ;beta [min, 0] :: Arr  . {  0<IDX && IDX <= I && I < (N-1) } =>  (  (array (g) [N] int ) [min,0]-> int [min,0] -> Uint[IDX] [min,0]-> Uint[I] [min, 8*((I-IDX)+1) ]-> {g->io } g : unit , [min,1*((I-IDX)+1)]  { g->io  } ) 
+        );
+       0; 0 } in 
+
+
+      letm a = { read s i :  {g->beta} g : (B (U int ) ), [diff,0] {g-> beta} ; U ({g-> io} g : int , [max,1]  { g-> io }, {g-> io} g : int , [min,1]  { g-> io } ); 0; 0 } in
+
+      letm bb = { (celim (insert () [] [] [] [] [] )) s a 0  i : {g-> beta} g : (unitR ), [diff,0] {g-> beta  }  ; U ({g->io} g : unit , [max,(3*I)]  { g->io  },  {g->io} g : unit , [min,I]  { g->io  }) ; 0 ; ((8*I)+5) } in
+
+     
+          (celim (isort () [] [] [] [] ) ) s (addone [] i) ls   
+         
+         } WITH { U ({g->io } g : unit , [max,((3/2)*(N-1)* N ) -((3/2)*I*(I))   ]  { g->io  }, 
+         {g->io } g : unit , [min, ((N-1)*(N/2)) - ((I)*(I/2) ) ]  { g->io  }) ;   ((4*N*(N-1)) - (4*(I-1)*I))+ (10*(N-I));   INTMIN(BETAMIN(beta),N-1 ) <= I }
+
+    } WITH { I < INTMIN(BETAMIN(beta),N-1 ) }
+
+
+<= 0 :   
+unitR => forall N [diff, 0] :: size ; I [diff,0] :: size ; g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {  1<=I && I < (N-1) }=> (  (array (g) [N] (U int)) =>  Bint[I] =>Bint[N] =>  {g-> beta} g : (U unit) , [diff,((2/2)*(N-1)* N ) -((2/2)*(INTMAX(I, INTMIN(BETAMIN(beta),N-1 )))*(INTMAX(I, INTMIN(BETAMIN(beta),N-1 ))) )]  { g-> io } )

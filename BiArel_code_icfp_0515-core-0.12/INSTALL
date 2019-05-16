@@ -1,0 +1,76 @@
+Ho to install BiArel
+-----------------------
+
+Dependencies:
+-----------------------
+
+1. Install OCaml >= 4.02 plus ocamlfind, ocamlbuild and menhir
+
+2. Install Why3 0.87+  ocaml libs from:
+
+   - http://why3.lri.fr/
+
+   Basically you want to go to Why3 source and do:
+
+   $ make
+   $ sudo make install
+   $ make byte opt
+   $ sudo make install-lib
+
+   The last two steps are important to make Ocaml recognize Why3 as a
+   library (Do not skip)
+
+3. Install Alt-ergo >= 0.99:
+
+   -http://alt-ergo.ocamlpro.com/
+
+   [Available through APT]
+
+4. Make sure Alt-ergo is registered as a prover for Why3
+   
+   $ why3config --detect
+
+   you should get something like:
+
+   Found prover Alt-Ergo version 0.99
+
+
+How to typecheck a program in BiArel:
+-----------------------
+
+
+1. Compile 
+
+   $ make
+
+2. Run example programs (located in examples/* where * is in {unary,binary})
+   -------------------------------
+   For all the programs except bfold and msort
+
+   $ ./biarel examples/binary/Amonad_map.br
+
+   For  ISort and Insert (set time out)
+
+   $ ./biarel -ht 2 examples/binary/Amonad_iSort.br
+
+   For unary examples
+   
+   $ ./biarel -u examples/unary/monad_map_max.br
+   
+
+How to run benchmarks in BiARel:
+-----------------------
+
+1. Get oUnit
+   http://ounit.forge.ocamlcore.org
+
+2. Compile BiArel Test framework
+
+   $ make test   
+
+3. Run benchmarks
+   
+   $./test.byte
+
+
+

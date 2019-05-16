@@ -1,0 +1,13 @@
+let leq  = { contra : int  [min, 0]-> int [min, 0] -> bool , 0 } in
+let addone = {contra : forall x [min, 0] :: size. Uint [x] [min, 0] -> Uint [x+1] , 0 } in  
+fix bo(z).  Lam. Lam. Lam. Lam. lam s. lam m. lam ls.  
+ if ( leq m ls) then
+      letm a = { read s m : {g->ie} g : bool , [min,1]  { g->ie  }, 0} in
+      if a then 
+         return true
+      else
+         (celim (bo () [] [] [] [] ) ) s (addone [] m) ls   
+else
+       return false
+
+<= [min, 0] : unit [min,0]-> forall N [min, 0] :: size ; M [min,0] :: size ;   g [min, 0] :: loc ; beta [min,0] :: Arr. {M < N } =>  (  (array (g) [N] bool) [min,0]-> Uint[M] [min,0]-> Uint[N] [min, 7*((N-M)+1) ]-> {g->ie } g :  bool , [min,1]  { g->ie  } )

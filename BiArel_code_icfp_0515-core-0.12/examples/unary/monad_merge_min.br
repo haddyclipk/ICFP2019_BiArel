@@ -1,0 +1,26 @@
+let leq  = { contra : int  [min, 0]-> int [min, 0] -> bool , 0 } in
+let addone = {contra : forall x [min, 0] :: size. Uint [x] [min, 0] -> Uint [x+1] , 0 } in 
+fix mg(z).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam k. lam a. lam ls. lam le. lam rs. lam re. lam b. 
+ if ( leq ls le) then
+    if ( leq rs re) then
+      letm x = { read a ls : {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }, 1} in
+      letm y = { read a rs : {g->io,f -> io  } g : int , [min,1]  { g->io ,f -> io  }, 0 } in
+      if (leq x y) then 
+         letm bo = { update b k x : {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  }, 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b  
+      else
+         letm bp = { update b k y : {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  }, 0  } in
+         (celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b  
+    else
+    	letm x_m  = { read a ls : {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }, 0} in
+    	letm bo_m = { update b k x_m : {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  }, 0  } in
+    	(celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a (addone [] ls) le rs re b
+ else
+   if (leq rs re) then
+       letm x_n  = { read a rs : {g->io, f -> io} g : int , [min,1]  { g->io ,f -> io }, 0} in
+    	letm bo_n = { update b k x_n : {g->io ,f -> io } g : unit , [min,1]  { g->io ,f -> io  }, 0  } in
+    	(celim (mg () [] [] [] [] [] [] [] []) ) (addone [] k) a ls le (addone [] rs) re b
+   else 
+       return ()
+
+<= [min, 0] : unit [min,0]-> forall n [min, 0] :: size ; K [min,0] :: size ; LS [min , 0] :: size ; LE [min , 0] :: size ; RS [min , 0] :: size ; RE [min , 0] :: size ; g [min, 0] :: loc ; f [min, 0] :: loc . {K < RE && LS <= LE && LE < RS && RS <= RE && RE <= n }=> ( Uint[K] [min,0]-> (array (g) [n] int) [min,0] -> Uint[LS] [min,0]->Uint[LE] [min,0]-> Uint[RS] [min,0]-> Uint[RE] [min,0] -> (array (f) [n] int) [min, 14*(RE-K) ]-> {g->io , f-> io} g :  unit , [min,2*(RE-K)]  { g->io, f -> io  } )

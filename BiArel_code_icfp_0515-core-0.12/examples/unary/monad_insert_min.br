@@ -1,0 +1,16 @@
+let leq  = { contra : int  [min, 0]-> int [min,   0] -> bool , 0 } in
+let addone = {contra : forall x [min, 0] :: size. Uint [x] [min, 0] -> Uint [x+1] , 0 } in 
+let subone = {contra : forall x [min, 0] :: size. Uint [x] [min, 0] -> Uint [x-1] , 0 } in 
+let shift = {contra :  unit [min,0]-> forall N [min, 0] :: size ; IDX [min,0] :: size ; I [min,0] :: size ;  g [min, 0] :: loc ; beta [min, 0] :: Arr . {  0<IDX && IDX <= I && I < (N-1) } =>  (  (array (g) [N] int ) [min,0]-> Uint[IDX] [min,0] -> Uint[I] [min, 7*((I-IDX)+1) ]-> {g->io } g : unit , [min,3*((I-IDX)+1)]  { g->io  } ) , 0 } in 
+fix insert(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam a. lam idx. lam i.  
+ 
+      letm b = { read s idx : {g->io} g : int , [min,1]  { g->io  }, 0} in
+      if (leq b a) then
+         (celim (insert () [] [] [] [] [] ) ) s a (addone [] idx)  i
+          else 
+
+      letm d = { (celim (shift () [] [] [] [] [] ) ) s idx (subone [] i) : {g->io } g : unit , [min,3*((I-IDX))]  { g->io  } , (7*((I-IDX)))+ 5 } in 
+        update s idx a 
+      
+
+<= [min, 0] : unit [min,0] -> forall N [min, 0] :: size ; IDX [min,0] :: size ; I [min,0] :: size ;  g [min, 0] :: loc ;beta [min, 0] :: Arr  . {  0<IDX && IDX <= I && I < (N-1) } =>  (  (array (g) [N] int ) [min,0]-> int [min,0] -> Uint[IDX] [min,0]-> Uint[I] [min, 8*((I-IDX)+1) ]-> {g->io } g : unit , [min,1*((I-IDX)+1)]  { g->io  } )

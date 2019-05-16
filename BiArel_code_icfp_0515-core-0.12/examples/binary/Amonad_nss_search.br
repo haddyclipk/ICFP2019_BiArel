@@ -1,0 +1,62 @@
+let eq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x+1] , 0 } in 
+let badd = {contra : forall xx [diff, 0] :: size; yy [diff, 0] :: size. Bint [xx] => Bint[yy] =>  Bint [xx+yy] , 0 } in 
+
+FIXEXT { unit -> forall Il [max, 0] :: size ; Ml [max,0] :: size ; Q [max , 0] :: size ; N [max , 0] :: size; g [max, 0] :: loc ; f [max, 0] :: loc  ; z [max, 0] :: loc ; beta [max, 0] :: Arr . {0 < Il && Il < Q && Q < N && Ml+Il < N }=> (  (array (g) [N] int) -> (array (f) [Q] int) -> Uint[Ml] ->Uint[Il] ->  Uint[Q] -> (array (z) [N] int) [max, 13*(Q-Il) ]-> {g->ie , f-> beta, z -> io} g :  unit , [max,5*(Q-Il)]  { g->ie, f -> beta , z -> io } )},
+
+ nss(v).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam s. lam w. lam m. lam i. lam lw. lam p. 
+  SPLIT {
+     SWITCH { 
+      letm a = { read s (badd [] [] m i) :  {g->ie, f -> beta, z->io} g : (B (U int ) ), [diff,0] {g->ie, f -> beta, z->io} ; U ({g->ie, f -> beta, z->io} g : int , [max,3]  { g->ie ,f -> beta,z->io }, {g->ie, f -> beta, z->io} g : int , [min,3]  { g->ie ,f -> beta,z->io } ); 0; 0 } in
+      letm b = { read w i : {g->ie, f -> beta, z->io} g : (B (U int ) ), [diff,0] {g->ie, f -> beta, z->io}  ; U ({g->ie,f -> beta , z-> io } g : int , [max,1]  { g->ie ,f -> beta , z-> io },  {g->ie , f -> beta , z-> io } g : int , [min,1]  { g->ie ,f -> beta , z-> io }) ; 0 ; 0 } in
+
+      if (eq (addone [] i) lw) 
+      then
+         if (eq a b ) 
+         then 
+           update p m 1
+         else
+           update p m 0
+      else
+    	 if (eq a b ) 
+         then 
+           (celim (nss () [] [] [] [] [] [] [] [] ) ) s w m (addone [] i) lw p
+         else
+           update p m 0
+         } WITH { U ({g->ie , f-> beta, z -> io} g :  unit , [max,5*(Q-Il)]  { g->ie, f -> beta , z -> io }, {g->ie , f-> beta , z -> io} g :  unit , [min,5]  { g->ie, f -> beta , z -> io }) ;   13*(Q-Il);  CBETAIN Il , beta }
+
+    } WITH { CNOT CBETAIN Il , beta  }
+,
+
+let eq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x] => Bint [x+1] , 0 } in 
+let badd = {contra : forall xx [diff, 0] :: size; yy [diff, 0] :: size. Bint [xx] => Bint[yy] =>  Bint [xx+yy] , 0 } in 
+
+FIXEXT { unit [min,0]-> forall Il [min, 0] :: size ; Ml [min,0] :: size ; Q [min , 0] :: size ; N [min , 0] :: size; g [min, 0] :: loc ; f [min, 0] :: loc  ; z [min, 0] :: loc ; beta [min, 0] :: Arr . {0 < Il && Il < Q && Q < N && Ml+Il < N }=> (  (array (g) [N] int) [min,0]-> (array (f) [Q] int) [min,0]-> Uint[Ml] [min,0] ->Uint[Il] [min,0] ->  Uint[Q] [min,0] -> (array (z) [N] int) [min, 13*(Q-Il) ]-> {g->ie , f-> beta , z -> io} g :  unit , [min,5]  { g->ie, f -> beta , z -> io } ) },
+
+ nss(v).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam s. lam w. lam m. lam i. lam lw. lam p. 
+  SPLIT {
+     SWITCH { 
+      letm a = { read s (badd [] [] m i) : {g->ie, f -> beta, z->io} g : (B (U int ) ), [diff,0] {g->ie, f -> beta, z->io} ; U ({g->ie, f -> beta, z->io} g : int , [max,3]  { g->ie ,f -> beta,z->io }, {g->ie, f -> beta, z->io} g : int , [min,3]  { g->ie ,f -> beta,z->io } ); 0; 0 } in
+      letm b = { read w i : {g->ie, f -> beta, z->io} g : (B (U int ) ), [diff,0] {g->ie, f -> beta, z->io} ; U ({g->ie,f -> beta , z-> io } g : int , [max,1]  { g->ie ,f -> beta , z-> io },  {g->ie,f -> beta , z-> io } g : int , [min,1]  { g->ie ,f -> beta , z-> io }) ; 0 ;0 } in
+
+      if (eq (addone [] i) lw) 
+      then
+         if (eq a b ) 
+         then 
+           update p m 1
+         else
+           update p m 0
+      else
+    	 if (eq a b ) 
+         then 
+           (celim (nss () [] [] [] [] [] [] [] [] ) ) s w m (addone [] i) lw p
+         else
+           update p m 0
+         } WITH { U ({g->ie , f-> beta, z -> io} g :  unit , [max,5*(Q-Il)]  { g->ie, f -> beta , z -> io }, {g->ie , f-> beta , z -> io} g :  unit , [min,5]  { g->ie, f -> beta , z -> io }) ;   13*(Q-Il);  CBETAIN Il , beta  }
+
+    } WITH { CNOT CBETAIN Il , beta   }
+
+
+<= 0 :   
+unitR => forall Il [diff, 0] :: size ; Ml [diff,0] :: size ; Q [diff , 0] :: size ; N [diff , 0] :: size; g [diff, 0] :: loc ; f [diff, 0] :: loc  ; z [diff, 0] :: loc ; beta [diff, 0] :: Arr . {0 < Il && Il < Q && Q < N && Ml+Il < N }=> (  (array (g) [N] (U int)) => (array (f) [Q] (U int) ) => Bint[Ml] =>Bint[Il] => Bint[Q] => (array (z) [N] (U int)) [diff, 0 ]-> {g->ie , f-> beta, z -> io} g : (U unit) , [diff,5*((Q-1)-INTMIN(Q-1, BETAMIN(beta Intersect [Il,Q] )  ) )]  { g->ie, f -> beta , z -> io } )

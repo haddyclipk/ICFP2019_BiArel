@@ -1,0 +1,19 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let eq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+
+fix sam(z). Lam. Lam. Lam. Lam. Lam. lam x. lam a. lam i. lam n.
+ if ( leq i n) then
+   SPLIT {
+   let func = {contra:  (U int) => (U int) =>  (U int) [diff, 1] -> (U int)  ; (U int) => (U int) =>  (B (U int)) [diff, 0] -> (U int) ; 0; 0  } in
+   letm b = { read a i :  {g->beta} g :   (U int ) , [diff,0]  { g->beta  } ; {g->beta} g : (B (U int ) ), [diff,0]  { g->beta  } ;  0 ; 0} in 
+   letm r = {  (celim (sam () [] [] [] [] [])) x a (addone [] i ) n : {g->beta} g :   (U int ) , [diff,  | beta Intersect [(I+1),N]| ]  { g->beta  } ; {g->beta} g :   (U int ) , [diff, | beta Intersect [(I+1),N]| ]  { g->beta  } ;0;0 } in 
+       return (func x r b)
+
+     } WITH { CBETAIN I , beta }
+else
+   if (eq x 0) then return 1
+   else  return x
+
+<= 0 : unitR => forall I; N; xv;  g [diff, 0] :: loc ; beta [diff, 0] :: Arr . {I < N} =>  Bint[xv] => ( (array (g) [N]  (U int)) => Bint[I] => Bint[N] => 
+{g-> beta} g :  (U int) , [diff, | beta Intersect [I,N]| ]  { g->beta   } )

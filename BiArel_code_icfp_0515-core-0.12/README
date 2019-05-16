@@ -1,0 +1,19 @@
+BiArel : Bidirectional Type Analysis for Relational Costs with arrays
+------------------------------------------------------------- 
+
+
+See INSTALL for directions for compiling and running BiArel and its test framework.
+
+See NOTES for detailed notes on notation
+
+-----------------------------
+- all the OCaml source is in src/
+  * birel.ml [Main file]
+  * tycheck.ml [Core typechecking functor]
+  * binary.ml  [Relational typechecking engine, monadic type check for arrays]
+  * unary.ml   [Unary typechecking engine, monadic type check for arrays]
+  * test.ml    [Test framework]
+- example programs are in examples/
+
+
+

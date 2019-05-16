@@ -1,0 +1,12 @@
+let leq  = { contra : int  [max, 0]-> int [max,   0] -> bool , 0 } in
+let addone = {contra : forall x [max, 0] :: size. Uint [x] [max, 0] -> Uint [x+1] , 0 } in 
+let subone = {contra : forall x [max, 0] :: size. Uint [x] [max, 0] -> Uint [x-1] , 0 } in 
+fix shift(z).  Lam. Lam. Lam. Lam. Lam. lam s. lam idx. lam i.  
+ if ( leq idx i) then
+      letm x = { read s i : {g->io} g : int , [max,1]  { g->io  }, 0} in
+      letm d = { update s (addone [] i) x :  {g->io} g : unit , [max,2]  { g->io  }, 0 } in 
+         (celim (shift () [] [] [] [] [] ) ) s idx (subone [] i)   
+else
+       return ()
+
+<= [max, 0] : unit -> forall N [max, 0] :: size ; IDX [max,0] :: size ; I [max,0] :: size ;  g [max, 0] :: loc ; beta [max, 0] :: Arr . {  0<IDX && IDX <= I && I < N } =>  (  (array (g) [N] int ) -> Uint[IDX] -> Uint[I] [max, 7*((I-IDX)+1) ]-> {g->io } g : unit , [max,3*((I-IDX)+1)]  { g->io  } )

@@ -1,0 +1,14 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+
+fix map(f). Lam. Lam. Lam. Lam. lam a. lam k. lam n.
+ if ( leq k n) then
+   letm x = { read a k : {g->b} g : (U int ), [diff,0]  { g->b  }, 0} in 
+   letm c = { update a k (f x) : {g->b } g : unitR , [diff,2]  { g->b Union [i]  }, 0 } in
+     (celim (map (f) [] [] [] []) ) a (addone [] k)  n
+else
+return ()
+
+<= 0 : ((U int) [diff, 2] -> (U int) ) => forall i; m; g [diff, 0] :: loc ; b [diff, 0] :: Arr . {i < m} =>  ( (array (g) [m]  (U int)) => Bint[i] => Bint[m] => 
+{g-> b} g :  unitR , [diff,2*(m-i) ]  { g->b Union [i,m]  } )
+  

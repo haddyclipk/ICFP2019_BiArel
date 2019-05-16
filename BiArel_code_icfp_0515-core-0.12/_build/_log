@@ -1,0 +1,105 @@
+### Starting build.
+# Target: src/biarel.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/biarel.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/biarel.ml > src/biarel.ml.depends # cached
+# Target: src/binary.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/binary.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/binary.ml > src/binary.ml.depends # cached
+# Target: src/constr.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/constr.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/constr.ml > src/constr.ml.depends # cached
+# Target: src/indexSyntax.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/indexSyntax.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/indexSyntax.ml > src/indexSyntax.ml.depends # cached
+# Target: src/indexSyntax.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/indexSyntax.cmo, file:src/indexSyntax.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/indexSyntax.cmo src/indexSyntax.ml # cached
+# Target: src/support.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/support.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/support.ml > src/support.ml.depends # cached
+# Target: src/support.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/support.cmo, file:src/support.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/support.cmo src/support.ml # cached
+# Target: src/constr.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/constr.cmo, file:src/constr.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/constr.cmo src/constr.ml # cached
+# Target: src/ctx.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/ctx.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/ctx.ml > src/ctx.ml.depends # cached
+# Target: src/syntax.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/syntax.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/syntax.ml > src/syntax.ml.depends # cached
+# Target: src/syntax.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/syntax.cmo, file:src/syntax.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/syntax.cmo src/syntax.ml # cached
+# Target: src/ctx.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/ctx.cmo, file:src/ctx.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/ctx.cmo src/ctx.ml # cached
+# Target: src/exist_elim.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/exist_elim.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/exist_elim.ml > src/exist_elim.ml.depends # cached
+# Target: src/print.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/print.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/print.ml > src/print.ml.depends # cached
+# Target: src/print.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/print.cmo, file:src/print.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/print.cmo src/print.ml # cached
+# Target: src/exist_elim.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/exist_elim.cmo, file:src/exist_elim.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/exist_elim.cmo src/exist_elim.ml # cached
+# Target: src/fresh_var.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/fresh_var.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/fresh_var.ml > src/fresh_var.ml.depends # cached
+# Target: src/fresh_var.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/fresh_var.cmo, file:src/fresh_var.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/fresh_var.cmo src/fresh_var.ml # cached
+# Target: src/ty_error.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/ty_error.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/ty_error.ml > src/ty_error.ml.depends # cached
+# Target: src/ty_error.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/ty_error.cmo, file:src/ty_error.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/ty_error.cmo src/ty_error.ml # cached
+# Target: src/tycheck.mli.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:mli, file:src/tycheck.mli, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/tycheck.mli > src/tycheck.mli.depends # cached
+# Target: src/tycheck_sigs.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/tycheck_sigs.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/tycheck_sigs.ml > src/tycheck_sigs.ml.depends # cached
+# Target: src/tycheck_sigs.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/tycheck_sigs.cmo, file:src/tycheck_sigs.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/tycheck_sigs.cmo src/tycheck_sigs.ml # cached
+# Target: src/tycheck.cmi, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:mli, file:src/tycheck.mli, interf, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/tycheck.cmi src/tycheck.mli # cached
+# Target: src/unary.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/unary.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/unary.ml > src/unary.ml.depends # cached
+# Target: src/whySolver.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/whySolver.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/whySolver.ml > src/whySolver.ml.depends
+# Target: src/whyCore.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/whyCore.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/whyCore.ml > src/whyCore.ml.depends # cached
+# Target: src/whyCore.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/whyCore.cmo, file:src/whyCore.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/whyCore.cmo src/whyCore.ml # cached
+# Target: src/whyTrans.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/whyTrans.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/whyTrans.ml > src/whyTrans.ml.depends # cached
+# Target: src/whyTrans.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/whyTrans.cmo, file:src/whyTrans.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/whyTrans.cmo src/whyTrans.ml # cached
+# Target: src/whySolver.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/whySolver.cmo, file:src/whySolver.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/whySolver.cmo src/whySolver.ml
++ ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/whySolver.cmo src/whySolver.ml
+File "src/whySolver.ml", line 38, characters 70-74:
+Warning 20: this argument will not be used by the function.
+File "src/whySolver.ml", line 61, characters 95-99:
+Warning 20: this argument will not be used by the function.
+File "src/whySolver.ml", line 293, characters 6-7:
+Warning 26: unused variable t.
+File "src/whySolver.ml", line 317, characters 6-7:
+Warning 26: unused variable t.
+# Target: src/unary.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/unary.cmo, file:src/unary.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/unary.cmo src/unary.ml # cached
+# Target: src/binary.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/binary.cmo, file:src/binary.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/binary.cmo src/binary.ml # cached
+# Target: src/lexer.mll, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:mll, file:src/lexer.mll, lexer, ocaml, ocamllex, quiet, thread }
+/Users/liuyiyao/.opam/4.07.1/bin/ocamllex.opt -q src/lexer.mll # cached
+# Target: src/lexer.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/lexer.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/lexer.ml > src/lexer.ml.depends # cached
+# Target: src/parser.mly, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:mly, file:src/parser.mly, infer, ocaml, ocamlyacc, parser, quiet, thread }
+/Users/liuyiyao/.opam/4.07.1/bin/ocamlyacc src/parser.mly # cached
+# Target: src/parser.mli.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:mli, file:src/parser.mli, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/parser.mli > src/parser.mli.depends # cached
+# Target: src/parser.cmi, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:mli, file:src/parser.mli, interf, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/parser.cmi src/parser.mli # cached
+# Target: src/lexer.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/lexer.cmo, file:src/lexer.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/lexer.cmo src/lexer.ml # cached
+# Target: src/util.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/util.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/util.ml > src/util.ml.depends # cached
+# Target: src/util.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/util.cmo, file:src/util.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/util.cmo src/util.ml # cached
+# Target: src/biarel.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/biarel.cmo, file:src/biarel.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/biarel.cmo src/biarel.ml # cached
+# Target: src/parser.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/parser.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/parser.ml > src/parser.ml.depends # cached
+# Target: src/parser.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/parser.cmo, file:src/parser.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/parser.cmo src/parser.ml # cached
+# Target: src/tycheck.ml.depends, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), debug, extension:ml, file:src/tycheck.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package unix,menhirLib,why3,core,oUnit,sedlex -modules src/tycheck.ml > src/tycheck.ml.depends # cached
+# Target: src/tycheck.cmo, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, compile, debug, extension:cmo, extension:ml, file:src/tycheck.cmo, file:src/tycheck.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -g -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src -o src/tycheck.cmo src/tycheck.ml # cached
+# Target: src/biarel.byte, tags: { package(unix,menhirLib,why3,core,oUnit,sedlex), byte, debug, dont_link_with, extension:byte, file:src/biarel.byte, link, ocaml, program, quiet, thread }
+ocamlfind ocamlc -linkpkg -g -thread -package unix,menhirLib,why3,core,oUnit,sedlex -I src src/indexSyntax.cmo src/support.cmo src/constr.cmo src/syntax.cmo src/ctx.cmo src/print.cmo src/exist_elim.cmo src/fresh_var.cmo src/ty_error.cmo src/tycheck_sigs.cmo src/tycheck.cmo src/whyCore.cmo src/whyTrans.cmo src/whySolver.cmo src/unary.cmo src/binary.cmo src/parser.cmo src/lexer.cmo src/util.cmo src/biarel.cmo -o src/biarel.byte
+# Compilation successful.

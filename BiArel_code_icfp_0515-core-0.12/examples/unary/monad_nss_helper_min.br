@@ -1,0 +1,25 @@
+let eq  = { contra : int  [min, 0]-> int [min, 0] -> bool , 0 } in
+let addone = {contra : forall x [min, 0] :: size. Uint [x] [min, 0] -> Uint [x+1] , 0 } in 
+let badd = {contra : forall xx [min, 0] :: size; yy [min, 0] :: size. Uint [xx] [min, 0] -> Uint[yy] [min,0]->  Uint [xx+yy] , 0 } in 
+fix f(zz).  Lam. Lam. Lam. Lam. Lam. Lam. Lam. Lam. lam s. lam w. lam m. lam i. lam lw. lam p. 
+ 
+      letm a = { read s (badd [] [] m i) : {g->ie, f -> io, z->io} g : int , [min,3]  { g->ie ,f -> io,z->io }, 0} in
+      letm b = { read w i : {g->ie , f -> io , z-> io } g : int , [min,1]  { g->ie ,f -> io , z-> io }, 0 } in
+
+      if (eq (addone [] i) lw) 
+      then
+         if (eq a b ) 
+         then 
+           update p m 1
+         else
+           update p m 0
+      else
+       if (eq a b ) 
+         then 
+           (celim (f () [] [] [] [] [] [] [] [] ) ) s w m (addone [] i) lw p
+         else
+           update p m 0
+   
+
+<= [min, 0] : unit [min,0]-> forall Il [min, 0] :: size ; Ml [min,0] :: size ; Q [min , 0] :: size ; N [min , 0] :: size; g [min, 0] :: loc ; f [min, 0] :: loc  ; z [min, 0] :: loc ; beta [min, 0] :: Arr . {0 < Il && Il < Q && Q < N && Ml+Il < N }=> (  (array (g) [N] int) [min,0]-> (array (f) [Q] int) [min,0]-> Uint[Ml] [min,0] ->Uint[Il] [min,0] ->  Uint[Q] [min,0] -> (array (z) [N] int) [min, 13*(Q-Il) ]-> {g->ie , f-> beta , z -> io} g :  unit , [min,5]  { g->ie, f -> beta , z -> io } )
+

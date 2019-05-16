@@ -1,0 +1,18 @@
+let leq  = { contra : intR => intR => boolR , 0 } in
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+let multTwo = {contra: forall x [diff,0] :: size. Bint[x] => Bint[2*x], 0} in
+let divTwo =  {contra: forall x[diff,0] :: size. Bint[x] => Bint[x/2],0} in
+let badd = {contra : forall xx [diff, 0] :: size; yy [diff, 0] :: size. Bint [xx] => Bint[yy] =>  Bint [xx+yy] , 0 } in 
+
+
+fix cp(z). Lam. Lam. Lam. Lam. Lam. Lam. lam x. lam y. lam l. lam u.
+ if ( leq l u  ) then
+   letm a = { read y l : {g-> io, f -> beta1} g : (U int), [diff,0]  { g-> io, f -> beta1 }, 0} in 
+   letm b = { update x l a : {g-> io, f -> beta1 } g : unitR , [diff,0]  { g-> io, f -> beta1  }, 0 } in
+     (celim (cp () [] [] [] [] [] [] ) ) x y (addone [] l)  u
+else
+return ()
+
+<= 0 : unitR => forall L [diff,0] :: size; Ul [diff,0] :: size ; N [diff,0] :: size ; g [diff, 0] :: loc ; f [diff,0] :: loc ; beta1 [diff, 0] :: Arr . {L < Ul && Ul < N } =>  ( (array (g) [N]  (U int)) => (array (f) [N] (U int)) =>  Bint[L] => Bint[Ul] =>
+{g-> io, f -> beta1} g :  unitR , [diff,0 ]  { g->beta1, f-> beta1 } )
+  

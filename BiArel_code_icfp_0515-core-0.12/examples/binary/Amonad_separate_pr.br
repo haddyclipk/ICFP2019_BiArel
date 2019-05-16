@@ -1,0 +1,22 @@
+
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+let subone = {contra : forall x [diff, 0] :: size. Bint [x] [diff, 0] -> Bint [x-1] , 0 } in 
+let badd = {contra : forall xx [diff, 0] :: size; yy [diff, 0] :: size. Bint [xx] => Bint[yy] =>  Bint [xx+yy] , 0 } in 
+
+
+let sp = {contra: unitR => forall M [diff,0] :: size ; N [diff,0] :: size; I [diff,0] :: size ; PR [diff,0] :: size; g [diff, 0] :: loc ; f [diff,0] :: loc ; beta1 [diff, 0] :: Arr . {(2*I) < (M-1) && (PR+M) < N } =>  ( (array (g) [N]  (U int)) => Bint[M] => Bint[I] => (array (f) [N] (U int) ) =>  Bint[PR] =>
+{g-> beta1, f -> io} g :  unitR , [diff,0 ]  { g->beta1, f-> io }) , 0 } in 
+
+let cp = {contra: unitR => forall L [diff,0] :: size; Ul [diff,0] :: size ; N [diff,0] :: size ; g [diff, 0] :: loc ; f [diff,0] :: loc ; beta1 [diff, 0] :: Arr . {L < Ul && Ul < N } =>  ( (array (g) [N]  (U int)) => (array (f) [N] (U int)) =>  Bint[L] => Bint[Ul] =>
+{g-> io, f -> beta1} g :  unitR , [diff,0 ]  { g->beta1, f-> beta1 } )  , 0 } in
+
+
+fix separate(z). Lam. Lam. Lam. Lam. Lam. Lam. lam x. lam n.  lam y. lam pr.
+
+   letm a = { (celim (sp () [] [] [] [] [] [] [] ) ) x n 0 y pr: {g-> beta1, f -> io} g : unitR, [diff,0]  { g-> beta1, f -> io  }, 0} in 
+
+     (celim (cp () [] [] [] [] [] [] ) )  x y pr (badd [] [] pr n)  
+
+
+<= 0 : unitR => forall M [diff,0] :: size ; N [diff,0] :: size ; PR [diff,0] :: size ;  g [diff, 0] :: loc ; f [diff,0] :: loc ; beta1 [diff, 0] :: Arr . {(PR+M) < N } =>  ( (array (g) [N]  (U int)) => Bint[M] => (array (f) [N] (U int) ) => Bint[PR] => {g-> beta1, f -> io} g :  unitR , [diff,0 ]  { g->io, f-> io } )
+  

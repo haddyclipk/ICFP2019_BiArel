@@ -1,0 +1,11 @@
+let leq  = { contra : int  [max, 0]-> int [max, 0] -> bool , 0 } in
+let addone = {contra : forall x [max, 0] :: size. Uint [x] [max, 0] -> Uint [x+1] , 0 } in 
+let insert = {contra:  unit -> forall Nx [max, 0] :: size ; Ax [max,0]:: size; IDXx [max,0] :: size ; Ix [max,0] :: size ;  gx [max, 0] :: loc . {  0<=IDXx && IDXx <= Ix && I < Nx } =>  (  (array (g) [Nx] int ) -> int -> Uint[IDXx] -> Uint[Ix] [max, 8*((Ix-IDXx)) ]-> {g->io } g : unit , [max,3*(Ix-IDXx)]  { g->io  } )  , 0  } in
+fix isort(z).  Lam. Lam. Lam.  lam s. lam i. lam ls.  
+	
+      letm a = { read s i : {g->io} g : int , [max,1]  { g->io  }, 0} in
+      letm b = { (celim (insert () [] [] [] [] [] )) s a 0  i   :  {g->io} g : unit , [max,(3*I)]  { g->io  }, (8*I)+5 } in 
+         (celim (isort () [] [] [] ) ) s (addone [] i) ls   
+
+
+<= [max, 0] : unit -> forall N [max, 0] :: size ;  I [max,0] :: size ;  g [max, 0] :: loc . {  1<=I && I < N } =>  (  (array (g) [N] int ) -> Uint[I] -> Uint[N] [max, ((4*N*(N-1)) - (4*(I-1)*I))+ (10*(N-I))   ]-> {g->io } g : unit , [max,(((3/2)*(N-1)* N ) -((3/2)*I*(I)))   ]  { g->io  } )

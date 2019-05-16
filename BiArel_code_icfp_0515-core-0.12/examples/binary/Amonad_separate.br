@@ -1,0 +1,19 @@
+
+let addone = {contra : forall x [diff, 0] :: size. Bint [x]  => Bint [x+1] , 0 } in 
+let subone = {contra : forall x [diff, 0] :: size. Bint [x] [diff, 0] -> Bint [x-1] , 0 } in 
+let sp = {contra: unitR => forall N [diff,0] :: size; I [diff,0] :: size ; g [diff, 0] :: loc ; f [diff,0] :: loc ; beta1 [diff, 0] :: Arr . {(2*I) < (N -1) } =>  ( (array (g) [N]  (U int)) => Bint[N] => Bint[I] => (array (f) [N] (U int) ) =>  
+{g-> beta1, f -> io} g :  unitR , [diff,0 ]  { g->beta1, f-> io } ) , 0 } in 
+let cp = {contra: unitR => forall L [diff,0] :: size; Ul [diff,0] :: size ; N [diff,0] :: size ; g [diff, 0] :: loc ; f [diff,0] :: loc ; beta1 [diff, 0] :: Arr . {L < Ul && Ul < N } =>  ( (array (g) [N]  (U int)) => (array (f) [N] (U int)) =>  Bint[L] => Bint[Ul] =>
+{g-> io, f -> beta1} g :  unitR , [diff,0 ]  { g->beta1, f-> beta1 } )  , 0 } in
+
+
+fix separate(z). Lam. Lam. Lam. Lam.  lam x. lam n.  lam y.
+
+   letm a = { (celim (sp () [] [] [] [] [] ) ) x n 0  y: {g-> beta1, f -> io} g : unitR, [diff,0]  { g-> beta1, f -> io  }, 0} in 
+
+     (celim (cp () [] [] [] [] [] [] ) )  x y 0 (subone [] n)  
+
+
+<= 0 : unitR => forall N [diff,0] :: size;  g [diff, 0] :: loc ; f [diff,0] :: loc ; beta1 [diff, 0] :: Arr .  (array (g) [N]  (U int)) => Bint[N] => (array (f) [N] (U int) ) =>  
+{g-> beta1, f -> io} g :  unitR , [diff,0 ]  { g->io, f-> io } 
+  
