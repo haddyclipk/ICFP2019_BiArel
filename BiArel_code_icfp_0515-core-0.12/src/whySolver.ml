@@ -17,7 +17,7 @@ let why_error   fi   = raise( Why3_error fi)
 
 let dp = Support.FileInfo.dummyinfo
 
- let why_debug  fi = message 0 SMT fi
+ let why_debug  fi = message 4 SMT fi
 
 
 let ps_plus =

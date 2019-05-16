@@ -96,7 +96,7 @@ let (prgm, cost, uty, mu) = parse_exec !infile in
     let cost = if (!debug_options.types_mode) then None else Some cost in
     let cs =  (Unary.check_type ctx prgm uty cost) in
     
-    main_debug dp "Typechecking engine: %fs\n" ((Unix.gettimeofday () -. t) -. !WhySolver.smt_time);
+    main_info dp "Typechecking engine: %fs\n" ((Unix.gettimeofday () -. t) -. !WhySolver.smt_time);
     main_debug dp "Resulting constraint:@\n@[%a@]@." Print.pp_cs cs;
     
     let tcons= Unix.gettimeofday ()  in
@@ -104,10 +104,10 @@ let (prgm, cost, uty, mu) = parse_exec !infile in
      E.elim ctx (Constr.constr_simpl cs)
             (fun cs' ->
              let elim_cs = Constr.constr_simpl cs' in
-             main_debug dp "Existential elimination time: %fs\n" (Unix.gettimeofday () -. tcons);
+             main_info dp "Existential elimination time: %fs\n" (Unix.gettimeofday () -. tcons);
             (*  main_debug dp "Eliminated constraint:@\n@[%a@]@." Print.pp_cs elim_cs; *)
              if ((WS.send_smt_u) elim_cs) then 
-               (main_debug dp "Total execution time: %fs\n" (Unix.gettimeofday () -. t);
+               (main_info dp "Total execution time: %fs\n" (Unix.gettimeofday () -. t);
         	raise Success) else ())
    with
      Success -> main_info dp "Successfully typechecked!\n"
@@ -123,21 +123,21 @@ let type_check_diff infile t =
     let cost = if (!debug_options.types_mode) then None else Some cost in
     let cs  =  (Binary.check_type ctx prgm1 prgm2 bty cost) in
 
-    main_debug dp "Typechecking engine: %fs\n" ((Unix.gettimeofday () -. t) -. !WhySolver.smt_time) ;
+    main_info dp "Typechecking engine: %fs\n" ((Unix.gettimeofday () -. t) -. !WhySolver.smt_time) ;
     (* main_debug dp "Resulting constraint:@\n@[%a@]@." Print.pp_cs cs;  *)
     let tcons= Unix.gettimeofday ()  in
     try
       E.elim ctx (cs)
         (fun cs' ->
            let elim_cs = Constr.constr_simpl cs' in
-           main_debug dp "Existential elimination time: %fs\n" (Unix.gettimeofday () -. tcons);
+           main_info dp "Existential elimination time: %fs\n" (Unix.gettimeofday () -. tcons);
            main_debug dp "Eliminated constraint:@\n@[%a@]@." Print.pp_cs elim_cs;
            if !debug_options.iter_no > 0
            then
              (debug_options := {!debug_options with iter_no = !debug_options.iter_no -1};
               if WS.send_smt elim_cs
               then 
-                (main_debug dp "Total execution time: %fs\n" (Unix.gettimeofday () -. t);
+                (main_info dp "Total execution time: %fs\n" (Unix.gettimeofday () -. t);
                  raise Success)
               else ())
            else raise Timeout
