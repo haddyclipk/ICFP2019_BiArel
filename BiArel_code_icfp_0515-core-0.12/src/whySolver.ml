@@ -311,7 +311,7 @@ let send_smt cs =
   why_debug dp "!*! -----------------------------------------------";
   
    let res =  post why3_cs 1 in
-  (* why_debug dp "Time for SMT solver:%f\n"  !smt_time; res*)
+   why_debug dp "Time for SMT solver:%f\n"  !smt_time; res
 
   let send_smt_u cs =
   let t = Unix.gettimeofday () in
@@ -335,4 +335,4 @@ let send_smt cs =
   why_debug dp "!*! -----------------------------------------------";
   
    let res =  post why3_cs 1 in
-   (*why_debug dp "Time for SMT solver:%f\n" !smt_time ; res *)
+   why_debug dp "Time for SMT solver:%f\n" !smt_time ; res 
