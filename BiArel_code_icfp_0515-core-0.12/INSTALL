@@ -4,35 +4,21 @@ Ho to install BiArel
 Dependencies:
 -----------------------
 
-1. Install OCaml >= 4.02 plus ocamlfind, ocamlbuild and menhir
+1. Install opam 
 
-2. Install Why3 0.87+  ocaml libs from:
+2. Choose a ocaml version, we use 4.05.0:   opam switch 4.05.0
 
-   - http://why3.lri.fr/
+3. Install why3 through opam:  opam install why3 (we use why3 version 1.0.0, if you use why3 1.2.0, you will find one error in src\whySolver.ml line 172, line 183 because the modification of why3, just change |CP.Unknown (s,_) -> CP.Unknown s will fix this error  )
 
-   Basically you want to go to Why3 source and do:
+4. Install alt-ergo : opam install "alt-ergo=2.0.0" ( we use 2.0.0, it is also named alt-ergo-free)
 
-   $ make
-   $ sudo make install
-   $ make byte opt
-   $ sudo make install-lib
-
-   The last two steps are important to make Ocaml recognize Why3 as a
-   library (Do not skip)
-
-3. Install Alt-ergo >= 0.99:
-
-   -http://alt-ergo.ocamlpro.com/
-
-   [Available through APT]
-
-4. Make sure Alt-ergo is registered as a prover for Why3
+5. Make sure Alt-ergo is registered as a prover for Why3
    
    $ why3config --detect
 
    you should get something like:
 
-   Found prover Alt-Ergo version 0.99
+   Found prover Alt-Ergo version 2.0.0
 
 
 How to typecheck a program in BiArel:
@@ -51,7 +37,7 @@ How to typecheck a program in BiArel:
 
    For  ISort and Insert (set time out)
 
-   $ ./biarel -ht 2 examples/binary/Amonad_iSort.br
+   $ ./biarel -ht 6 examples/binary/Amonad_iSort.br
 
    For unary examples
    
@@ -62,9 +48,9 @@ How to run benchmarks in BiARel:
 -----------------------
 
 1. Get oUnit
-   http://ounit.forge.ocamlcore.org
+   Opam install oUnit
 
-2. Compile BiArel Test framework
+2. Compile Test framework
 
    $ make test   
 

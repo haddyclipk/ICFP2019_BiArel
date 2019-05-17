@@ -36,9 +36,9 @@
 - Troubleshooting
   Possible problems:
   * 'Unbound module Why3': make sure you run make install lib in why3 directory
-  * 'Fatal error: exception Loc.Located(_, _)' :  'birel.why' theory file is wrong.
+  * 'Fatal error: exception Loc.Located(_, _)' :  'biarel.why' theory file is wrong.
      This error arises if you changes 'birel.why'. 
      To debug: make sure it works by proving the lemmas:
      $ why3 prove -P alt-ergo birel.why
-  * The version of Why3 used here is 0.87.3
+  * The version of Why3 used here is 1.0.0
   
